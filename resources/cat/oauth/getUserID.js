@@ -1,6 +1,6 @@
 var exports = module.exports = {};
 var dbConn = require("../../elf/db/dbConn.js");
-var logger=require("../../..logger.js").getLogger();
+var logger=require("../../../logger.js").getLogger();
 
 var urlLinkedin='api.linkedin.com';
 var urlBasicProfie='/v1/people/~:(id,first-name,last-name,picture-urls::(original),email-address,industry,headline,specialties,positions,picture-url,public-profile-url)?format=json';

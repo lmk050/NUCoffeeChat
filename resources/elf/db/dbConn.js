@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 var Promise = require('promise');
-var logger=require("../../..logger.js").getLogger();
+var logger=require("../../../logger.js").getLogger();
 
 var exports = module.exports = {};
 

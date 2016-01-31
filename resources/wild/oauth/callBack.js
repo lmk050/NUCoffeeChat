@@ -2,7 +2,7 @@ var exports = module.exports = {};
     oauth2 = require('simple-oauth2'),
     path = require('path');
     auth = require('./auth.js')
-    logger=require("../../..logger.js").getLogger();
+    logger=require("../../../logger.js").getLogger();
 
 exports.path='callback';
 
