@@ -6,17 +6,18 @@ var express = require('express'),
     // path = require('path');
     bodyParser = require('body-parser');
     dbConn = require("./Resources/elf/db/dbConn.js");
+    logger=require("./logger.js").getLogger();
 
 // App settings
 
 var myLogger = function (req, res, next) {
-  console.log('myLogger - new request: '+req.path);
+  logger.debug('myLogger - new request: '+req.path);
   next();
 };
 var cookieParser = require('cookie-parser');
 
 var myAutheticator = function (req, res, next) {
-    console.log('myLogger - new request: '+req.cookies.userID);
+    logger.debug('myLogger - new request: '+req.cookies.userID);
     if(undefined === req.cookies.userID || "undefined" == req.cookies.userID   )
     {
         authenticationFailed(req, res, next);
@@ -47,14 +48,14 @@ function authenticationFailed(req, res, next) {
     var path = req.path;
     if(path =="/" || path =="/callback" || path=="/wild/oauth/auth" || path=="/cat/oauth/getUserID")
     {
-         console.log("authenticationFailed : path matched ");
+         logger.debug("authenticationFailed : path matched ");
          next();
          return;
     }  
     console.log("authenticationFailed -- ");
     if(path.slice(1,5) == 'wild')
     {
-        console.log("authenticationFailed : redirect request to home page ");
+        logger.debug("authenticationFailed : redirect request to home page ");
         res.redirect('/');
     }
     res.status(401);
@@ -80,34 +81,39 @@ app.get('/', function(req, res) {
 
 var fs = require('fs');
 var resource = null;
-fs.readFile('./Resources/resources.txt', function(err, data) {
+fs.readFile('./resources/resources.txt', function(err, data) {
     if (err) throw err;
-    var array = data.toString().split("\r\n");
+    var array = data.toString().split("\n");
     for (i in array) {
-        console.log(array[i]);
+        logger.debug(array[i]);
         resource = require(array[i]);
         if (typeof resource.getHandle === 'function')
         {
-            console.log(resource.path+" GET");
+            logger.debug(resource.path+" GET");
              app.get('/' + resource.path, resource.getHandle );
         }
         if (typeof resource.postHandle === 'function')
         {
-            console.log(resource.path+" POST");
+            logger.debug(resource.path+" POST");
              app.post('/' + resource.path, resource.postHandle);
         }
         if (typeof resource.putHandle === 'function')
         {
-            console.log(resource.path+" PUT");
+           logger.debug(resource.path+" PUT");
              app.put('/' + resource.path, resource.putHandle);
         }       
     }
 });
 
+app.use(function(err, req, res, next) {
+  logger.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
 var port = process.env.PORT || 1337;
 
 app.listen(port, function() {
-    console.log('Example app listening on port %s!', port);
+    logger.debug('Example app listening on port %s!', port);
 });
 
 
