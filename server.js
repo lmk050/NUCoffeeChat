@@ -5,7 +5,7 @@ var express = require('express'),
     // oauth2 = require('simple-oauth2'),
     // path = require('path');
     bodyParser = require('body-parser');
-    dbConn = require("./resources/elf/db/dbConn.js");
+    dbConn = require("./Resources/elf/db/dbConn.js");
 
 // App settings
 
@@ -80,7 +80,7 @@ app.get('/', function(req, res) {
 
 var fs = require('fs');
 var resource = null;
-fs.readFile('./resources/resources.txt', function(err, data) {
+fs.readFile('./Resources/resources.txt', function(err, data) {
     if (err) throw err;
     var array = data.toString().split("\n");
     for (i in array) {
