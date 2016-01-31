@@ -82,7 +82,7 @@ var fs = require('fs');
 var resource = null;
 fs.readFile('./Resources/resources.txt', function(err, data) {
     if (err) throw err;
-    var array = data.toString().split("\n");
+    var array = data.toString().split("\r\n");
     for (i in array) {
         console.log(array[i]);
         resource = require(array[i]);
