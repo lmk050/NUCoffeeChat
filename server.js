@@ -5,7 +5,7 @@ var express = require('express'),
     // oauth2 = require('simple-oauth2'),
     // path = require('path');
     bodyParser = require('body-parser');
-    dbConn = require("./Resources/elf/db/dbConn.js");
+    dbConn = require("./resources/elf/db/dbConn.js");
 
 // App settings
 
