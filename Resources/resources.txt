@@ -1,5 +1,0 @@
-./resources/cat/oauth/getUserID.js
-./resources/cat/user/getUserName.js
-./resources/cat/user/currentUser.js
-./resources/wild/oauth/auth.js
-./resources/wild/oauth/callBack.js
