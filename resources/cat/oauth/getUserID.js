@@ -1,5 +1,6 @@
 var exports = module.exports = {};
 var dbConn = require("../../elf/db/dbConn.js");
+var logger=require("../../..logger.js").getLogger();
 
 var urlLinkedin='api.linkedin.com';
 var urlBasicProfie='/v1/people/~:(id,first-name,last-name,picture-urls::(original),email-address,industry,headline,specialties,positions,picture-url,public-profile-url)?format=json';
@@ -7,11 +8,11 @@ var urlBasicProfie='/v1/people/~:(id,first-name,last-name,picture-urls::(origina
 exports.path='cat/oauth/getUserID';
 
 exports.postHandle=function (req,res) {
-	console.log('oAuth/getUserId: userID: request received');
+	logger.debug('oAuth/getUserId: userID: request received');
 	// console.log('oAuth/getUserId: body: '+ req.body.accessToken);
 	req.accepts('application/json');
 	var accessToken =req.body.accessToken;
-	console.log('oAuth/getUserId: accessToken: '+ accessToken);
+	logger.debug('oAuth/getUserId: accessToken: '+ accessToken);
 	getLinkedInBasicProfie(accessToken,res);
 }
 
@@ -32,12 +33,12 @@ function getLinkedInBasicProfie(accessToken,res)
             body += d;
         });
         response.on('end', function() {
-			console.log('getBasicProfie: '+body);
+			logger.debug('getBasicProfie: '+body);
             var parsed = JSON.parse(body);
-            console.log('getBasicProfie errorcode: '+parsed.errorCode);
+            logger.debug('getBasicProfie errorcode: '+parsed.errorCode);
             if( parsed.id === undefined)
             {
-            	console.log('getBasicProfie going to send back error msg');
+            	logger.debug('getBasicProfie going to send back error msg');
             	res.status(parseInt(parsed.status)).json({error:parsed.message});
             }
             else
@@ -63,7 +64,7 @@ function createUserIfNotExist(parsed,accessToken,res)
 			function(val)
 			{
 				
-          	  	console.log("getUserID: get user id: "+ val);
+          	  	logger.debug("getUserID: get user id: "+ val);
 				res.json({user:val});
             }
         ).catch(

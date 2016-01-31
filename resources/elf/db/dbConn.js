@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var Promise = require('promise');
+var logger=require("../../..logger.js").getLogger();
 
 var exports = module.exports = {};
 
@@ -13,9 +14,9 @@ var pool = mysql.createPool({
 });
 
 exports.clearup = function(){
-    console.log('Going to release DB connection pool');
+    logger.debug('Going to release DB connection pool');
     pool.end(function (err) { //release all connections
-        console.log('Error in release pool '+err);
+        logger.debug('Error in release pool '+err);
     });
 }
 
@@ -25,11 +26,11 @@ exports.getUserName = function(userId){
            pool.getConnection(function(err, connection) {
             if (err) {
                 connection.release();
-                console.log('Error in connection database');
+                logger.debug('Error in connection database');
 
                 reject('Error in connection database');
             }
-            console.log('connected as id ' + connection.threadId);
+            logger.debug('connected as id ' + connection.threadId);
 
             var sql = "SELECT * FROM ?? WHERE ?? = ?";
             var inserts = ['user_basic', 'id', userId];
@@ -39,7 +40,7 @@ exports.getUserName = function(userId){
                 if(!err)
                 {
                     if(rows.length > 0 ) {
-                    console.log("dbConn: found user: "+ userId);
+                    logger.debug("dbConn: found user: "+ userId);
                     var result='{"id":"'+userId+'","firstName":"'+rows[0].firstName+'","lastName":"'+rows[0].lastName+'","profilePicSmall":"'+rows[0].profilePicS+'"}';
                     connection.release();
                     resolve(result);
@@ -47,7 +48,7 @@ exports.getUserName = function(userId){
                     }
                     else
                     {
-                        console.log("dbConn: didnt find user: "+ userId);
+                        logger.debug("dbConn: didnt find user: "+ userId);
                         connection.release();
                         reject('{"error":"400", "errorMsg":"Invalid UserID"}');
                                     
@@ -55,7 +56,7 @@ exports.getUserName = function(userId){
                 }
                 else
                 {
-                     console.log('Error in connection database');
+                     logger.debug('Error in connection database');
                      connection.release();
                      reject('{"error":"500","errorMsg": '+err+'}');
                 }
@@ -64,7 +65,7 @@ exports.getUserName = function(userId){
                     
 
             connection.on('error',function(err) {
-                console.log('Error in connection database');
+                logger.debug('Error in connection database');
                 connection.release();
                 reject('{"error":"500","errorMsg": "Error in connection database"}');
 
@@ -83,10 +84,10 @@ exports.createUserIfNotExist = function(obj, accessToken) {
             pool.getConnection(function(err, connection) {
                 if (err) {
                     connection.release();
-                    console.log('Error in connection database');
+                    logger.debug('Error in connection database');
                     reject('{"error":"500","errorMsg": "Error in connection database"}');
                 }      
-                console.log('connected as id ' + connection.threadId);
+                logger.debug('connected as id ' + connection.threadId);
                 var sql = "SELECT * FROM ?? WHERE ?? = ?";
                 var inserts = ['user_basic', 'linkedInID', obj.id];
                 var query = mysql.format(sql, inserts);
@@ -95,7 +96,7 @@ exports.createUserIfNotExist = function(obj, accessToken) {
                     var userId = '';
                     if(rows.length > 0 ) {
                          userId += rows[0].id;
-                         console.log("createUserIfNotExist: found user: "+ userId);
+                        logger.debug("createUserIfNotExist: found user: "+ userId);
                          resolve(userId);
                     }
                     
@@ -103,17 +104,17 @@ exports.createUserIfNotExist = function(obj, accessToken) {
                     sql = "SELECT * FROM ?? WHERE ?? = ?";
                     inserts = ['industry_desc', 'name', industry];
                     query = mysql.format(sql, inserts);
-                    console.log("createUserIfNotExist: going to query industry: "+ query);
+                    logger.debug("createUserIfNotExist: going to query industry: "+ query);
 
                     connection.query(query, function(err, rows2) {
-                        console.log("createUserIfNotExist: inside the callback: "+ err+" ... "+rows2);
+                        logger.debug("createUserIfNotExist: inside the callback: "+ err+" ... "+rows2);
                         if (!err) {
                                 var industryId='';
                                  if(rows2.length > 0 ) {
                                      industryId += rows2[0].id;
-                                     console.log("createUserIfNotExist: found industryId: "+ industryId);
+                                     logger.debug("createUserIfNotExist: found industryId: "+ industryId);
                                 }
-                                console.log("createUserIfNotExist: going to create user ");
+                               logger.debug("createUserIfNotExist: going to create user ");
                                 var firstName = obj.firstName;
                                 if(firstName === undefined || firstName=='undefined') 
                                 {
@@ -165,11 +166,11 @@ exports.createUserIfNotExist = function(obj, accessToken) {
                                 };
 
                                 connection.query("INSERT INTO user_basic SET ?", post, function(err, result) {
-                                     console.log("createUserIfNotExist: inside the  insert callback: "+ err+" ... "+result);
+                                     logger.debug("createUserIfNotExist: inside the  insert callback: "+ err+" ... "+result);
         
                                     if (!err) {
                                         userId = result.insertId;
-                                        console.log("createUserIfNotExist: created user: "+ userId);
+                                        logger.debug("createUserIfNotExist: created user: "+ userId);
                                         addPositions(userId,obj.positions,connection);
                                         resolve(userId);
                                         return;
@@ -177,7 +178,7 @@ exports.createUserIfNotExist = function(obj, accessToken) {
                                     else
                                     {
                                         connection.release();
-                                        console.log('Error in connection database');
+                                        logger.debug('Error in connection database');
                                         reject('{"error":"500","errorMsg": '+err+'}');
                                     }
                                 });
@@ -186,7 +187,7 @@ exports.createUserIfNotExist = function(obj, accessToken) {
                         else
                         {
                             connection.release();
-                            console.log('Error in connection database');
+                            logger.debug('Error in connection database');
                             reject('{"error":"500","errorMsg": '+err+'}');
                         }      
                     
@@ -208,7 +209,7 @@ function addPositions(userId,positions, connection)
         return;
     }
     positions.values.forEach (function(obj) { 
-        console.log("going to add position "+obj.title); 
+        logger.debug("going to add position "+obj.title); 
 
         var endDateYear;
         var endDateMonth;
@@ -226,15 +227,15 @@ function addPositions(userId,positions, connection)
         var inserts = [userId, obj.company.industry, obj.company.name, obj.company.size, obj.company.type, obj.isCurrent, obj.startDate.year, obj.startDate.month, endDateYear, endDateMonth,obj.title];
         var query = mysql.format(sql, inserts);
 
-        console.log("addPositions: going to add position with query: "+ query);
+        logger.debug("addPositions: going to add position with query: "+ query);
 
         connection.query(query, function(err, rows) {
-            console.log("addPositions: inside the callback: "+ err+" ... "+rows);
+            logger.debug("addPositions: inside the callback: "+ err+" ... "+rows);
             if (!err) {
             }
             else
             {
-                console.log("addPositions: err in adding position: "+ err+" ... ");
+                logger.debug("addPositions: err in adding position: "+ err+" ... ");
             }
         });
         
