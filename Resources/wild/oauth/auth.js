@@ -14,7 +14,7 @@ exports.linkedInOauth2 = oauth2({
 
 // Authorization oauth2 URI
 var authorization_uri = exports.linkedInOauth2.authCode.authorizeURL({
-    redirect_uri: 'http://localhost:1337/callback',
+    redirect_uri: 'http://nucoffeechat.azurewebsites.net/callback',
     scope: 'r_basicprofile r_emailaddress',
     state: 'example-state-for-now-but-we-really-need-to-change-this'
 });

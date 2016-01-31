@@ -16,7 +16,7 @@ exports.getHandle=function (req,res) {
     auth.linkedInOauth2.authCode.getToken({
             code: code,
             state: state,
-            redirect_uri: 'http://localhost:1337/callback'
+            redirect_uri: 'http://nucoffeechat.azurewebsites.net/callback'
         },
         saveToken);
 
