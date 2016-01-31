@@ -85,8 +85,8 @@ fs.readFile('./resources/resources.txt', function(err, data) {
     if (err) throw err;
     var array = data.toString().split("\n");
     for (i in array) {
-        logger.debug(array[i]);
-        resource = require(array[i]);
+        logger.debug(array[i].replace(/(\r\n|\n|\r)/gm,""));
+        resource = require(array[i].replace(/(\r\n|\n|\r)/gm,""));
         if (typeof resource.getHandle === 'function')
         {
             logger.debug(resource.path+" GET");
