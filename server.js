@@ -79,31 +79,54 @@ app.get('/', function(req, res) {
 });
 
 
-var fs = require('fs');
+// var fs = require('fs');
+// var resource = null;
+// fs.readFile('./resources/resources.txt', function(err, data) {
+//     if (err) throw err;
+//     var array = data.toString().split("\n");
+//     for (i in array) {
+//         logger.debug(array[i].replace(/(\r\n|\n|\r)/gm,""));
+//         resource = require(array[i].replace(/(\r\n|\n|\r)/gm,""));
+//         if (typeof resource.getHandle === 'function')
+//         {
+//             logger.debug(resource.path+" GET");
+//              app.get('/' + resource.path, resource.getHandle );
+//         }
+//         if (typeof resource.postHandle === 'function')
+//         {
+//             logger.debug(resource.path+" POST");
+//              app.post('/' + resource.path, resource.postHandle);
+//         }
+//         if (typeof resource.putHandle === 'function')
+//         {
+//            logger.debug(resource.path+" PUT");
+//              app.put('/' + resource.path, resource.putHandle);
+//         }       
+//     }
+// });
+
 var resource = null;
-fs.readFile('./resources/resources.txt', function(err, data) {
-    if (err) throw err;
-    var array = data.toString().split("\n");
-    for (i in array) {
-        logger.debug(array[i].replace(/(\r\n|\n|\r)/gm,""));
-        resource = require(array[i].replace(/(\r\n|\n|\r)/gm,""));
-        if (typeof resource.getHandle === 'function')
-        {
-            logger.debug(resource.path+" GET");
-             app.get('/' + resource.path, resource.getHandle );
-        }
-        if (typeof resource.postHandle === 'function')
-        {
-            logger.debug(resource.path+" POST");
-             app.post('/' + resource.path, resource.postHandle);
-        }
-        if (typeof resource.putHandle === 'function')
-        {
-           logger.debug(resource.path+" PUT");
-             app.put('/' + resource.path, resource.putHandle);
-        }       
+var array = ['./Resources/cat/oauth/getUserID.js','./Resources/cat/user/getUserName.js','./Resources/cat/user/currentUser.js','./Resources/wild/oauth/auth.js','./Resources/wild/oauth/callBack.js'];
+for (i in array) {
+    logger.debug(array[i]);
+    resource = require(array[i]);
+    if (typeof resource.getHandle === 'function')
+    {
+        logger.debug(resource.path+" GET");
+         app.get('/' + resource.path, resource.getHandle );
     }
-});
+    if (typeof resource.postHandle === 'function')
+    {
+        logger.debug(resource.path+" POST");
+         app.post('/' + resource.path, resource.postHandle);
+    }
+    if (typeof resource.putHandle === 'function')
+    {
+       logger.debug(resource.path+" PUT");
+         app.put('/' + resource.path, resource.putHandle);
+    }       
+    }
+
 
 app.use(function(err, req, res, next) {
   logger.error(err.stack);
