@@ -30,13 +30,13 @@ exports.getHandle=function (req,res) {
 
         // this is where we need to do something with their token...
         logger.debug(token);
-        createOAuthUser(token.token.access_token,req, res)
+        createOAuthUser(token.token.access_token,req.get('host'), res)
 
         
     }
 }
 
-function createOAuthUser(token,req, res)
+function createOAuthUser(token,host, res)
 {
     logger.debug('createOAuthUser token', token);
     var http = require('http'); 
@@ -45,9 +45,9 @@ function createOAuthUser(token,req, res)
         accessToken: token
     });
 
-    logger.debug('createOAuthUser req host', req.get('host'));
+    logger.debug('createOAuthUser req host', host);
     var options = {
-      host: req.get('host'),
+      host: host,
       path: '/cat/oauth/getUserID',
       method: 'POST',
       headers: {
@@ -70,7 +70,7 @@ function createOAuthUser(token,req, res)
             
         });
 
-        req.on('error', function(e) {
+        response.on('error', function(e) {
             logger.debug('server.js: createOAuthUser met error '+ e);
             res.redirect('/');
         });
