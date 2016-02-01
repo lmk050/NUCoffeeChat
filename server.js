@@ -142,7 +142,7 @@ app.listen(port, function() {
 });
 
 
-process.stdin.resume();//so the program will not close instantly
+//process.stdin.resume();//so the program will not close instantly
 
 function exitHandler(options, err) {
     if (options.cleanup){
