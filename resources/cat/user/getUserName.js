@@ -15,7 +15,7 @@ exports.getHandle=function (req,res) {
 
 function getUserName(userId,res)
 {
-	var p1 = dbConn.getUserName(userId);
+	var p1 = dbConn.getUserInfo(userId);
 	return p1.then(
         function(val)
         {

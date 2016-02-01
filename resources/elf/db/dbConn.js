@@ -20,6 +20,64 @@ exports.clearup = function(){
     });
 }
 
+
+exports.getUserInfo = function(userId){
+
+    return new Promise(function(resolve, reject) {
+           pool.getConnection(function(err, connection) {
+            if (err) {
+                connection.release();
+                logger.debug('Error in connection database');
+
+                reject('Error in connection database');
+            }
+            logger.debug('connected as id ' + connection.threadId);
+
+            var sql = "SELECT u.id, u.firstName, u.lastName, u.email, u.headline, u.profilePicO, u.linkedInProfile, i.`name` as industry From user_basic as u LEFT JOIN industry_desc as i on u.industry = i.id WHERE u.id =?";
+            var inserts = [userId];
+            sql = mysql.format(sql, inserts);
+
+            logger.debug("getUserInfo: going to query user info: "+ sql);
+            connection.query(sql,function(err, rows) {
+                if(!err)
+                {
+                    if(rows.length > 0 ) {
+                    logger.debug("dbConn: found user: "+ userId);
+                    var result='{"userId":"'+userId+'","firstName":"'+rows[0].firstName+'","lastName":"'+rows[0].lastName+'","headLine":"'+rows[0].headline+'","industry":"'+rows[0].industry+'","profilePic":"'+rows[0].profilePicO+'","linkedInProfile":"'+rows[0].linkedInProfile+'"}';
+                    connection.release();
+                    resolve(result);
+                
+                    }
+                    else
+                    {
+                        logger.debug("dbConn: didnt find user: "+ userId);
+                        connection.release();
+                        reject('{"error":"400", "errorMsg":"Invalid UserID"}');
+                                    
+                    }
+                }
+                else
+                {
+                     logger.debug('Error in connection database');
+                     connection.release();
+                     reject('{"error":"500","errorMsg": '+err+'}');
+                }
+               
+            });
+                    
+
+            connection.on('error',function(err) {
+                logger.debug('Error in connection database');
+                connection.release();
+                reject('{"error":"500","errorMsg": "Error in connection database"}');
+
+            });
+        });
+       });
+
+}
+
+
 exports.getUserName = function(userId){
 
     return new Promise(function(resolve, reject) {
@@ -97,8 +155,8 @@ exports.createUserIfNotExist = function(obj, accessToken) {
                     if(rows.length > 0 ) {
                          userId += rows[0].id;
                         logger.debug("createUserIfNotExist: found user: "+ userId);
-                        resolve(userId);
-                        return;
+                         resolve(userId);
+                         return;
                     }
                     
                     var industry = obj.industry;
@@ -110,7 +168,7 @@ exports.createUserIfNotExist = function(obj, accessToken) {
                     connection.query(query, function(err, rows2) {
                         logger.debug("createUserIfNotExist: inside the callback: "+ err+" ... "+rows2);
                         if (!err) {
-                                var industryId=0;
+                                var industryId=0; // hardcoded to not finding the industry. need to change later
                                  if(rows2.length > 0 ) {
                                      industryId += rows2[0].id;
                                      logger.debug("createUserIfNotExist: found industryId: "+ industryId);
