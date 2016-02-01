@@ -137,7 +137,7 @@ exports.createUserIfNotExist = function(obj, accessToken) {
                                     profilePicS='';
                                 }
                                 var profilePicO = obj.pictureUrls;
-                                if(profilePicO === undefined || profilePicO=='undefined') 
+                                if(profilePicO === undefined || profilePicO=='undefined' || profilePicO._total==0) 
                                 {
                                     profilePicO='';
                                 }
@@ -203,7 +203,7 @@ exports.createUserIfNotExist = function(obj, accessToken) {
 
 function addPositions(userId,positions, connection)
 {
-    if(positions===undefined || positions =="undefined" )
+    if(positions===undefined || positions =="undefined" || positions._total ==0 )
     {
         connection.release();
         return;
