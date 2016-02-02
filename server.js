@@ -96,8 +96,7 @@ app.get('/', function(req, res) {
     var http = require('http'); 
 
     var options = {
-      host: 'localhost',
-      port: 1337,
+      host: req.get('host'),
       path: '/cat/user/getRandomUsers',
       method: 'GET',
       headers: {'Cookie': 'userID='+req.cookies.userID}
