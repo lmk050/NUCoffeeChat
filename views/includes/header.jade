@@ -1,0 +1,14 @@
+nav(class="white z-depth-0")
+	div(class="nav-wrapper")
+		a(href="/")
+			img(class="brand-logo coffe-chat-logo" src="/image/logo.png")
+		ul(class="right hide-on-med-and-down")
+			//- li
+				a(class="grey-text text-darken-3") Team
+			//-li
+				a(class="grey-text text-darken-3") Contact
+			if (curUser)
+				li
+					img(class="brand-logo coffe-chat-logo" src=curUser.profilePicSmall)
+				li
+					a(class="grey-text text-darken-3")=curUser.firstName

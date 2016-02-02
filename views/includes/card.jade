@@ -1,0 +1,14 @@
+div(class="card z-depth-1")
+	div(class="card-image waves-effect waves-block waves-light")
+		img(src=person.profilePic)
+		span(class="card-title")=person.firstName
+	div(class="card-content")
+		p(class="truncate")=person.headLine
+		p=person.industry
+	div(class="card-reveal")
+		span(class="card-title" style="pointer-events:none;")=person.firstName
+		//p=person.bio
+		//each tag in person.tags
+			div(class="chip") ##{p=person.industry}
+		p
+		a(href="https://www.linkedin.com/") Look at #{person.linkedInProfile}'s LinkedIn

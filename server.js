@@ -2,8 +2,7 @@
 var express = require('express'),
     app = express(),
     request = require('request'),
-    // oauth2 = require('simple-oauth2'),
-    // path = require('path');
+    path = require('path');
     bodyParser = require('body-parser');
     dbConn = require("./Resources/elf/db/dbConn.js");
     logger=require("./logger.js").getLogger();
@@ -27,22 +26,25 @@ var myAutheticator = function (req, res, next) {
     }
     else
     {
-        var userID= req.cookies.userID;
-        var p1 = dbConn.getUserName(userID);
-        return p1.then(
-            function(val)
-            {
-               var obj=JSON.parse(val);
-               console.log("serverjs: validated user: "+ obj.id);
-               req.loginUserID=obj.id;
-               next();
-               return;
-            }
-        ).catch(
-            function(reason) {
-                authenticationFailed(req, res, next);
-            }
-        );
+       var userID= req.cookies.userID;
+        req.loginUserID=userID;
+        next();
+        return;
+        // var p1 = dbConn.getUserName(userID);
+        // return p1.then(
+        //     function(val)
+        //     {
+        //        var obj=JSON.parse(val);
+        //        console.log("serverjs: validated user: "+ obj.id);
+        //        req.loginUserID=obj.id;
+        //        next();
+        //        return;
+        //     }
+        // ).catch(
+        //     function(reason) {
+        //         authenticationFailed(req, res, next);
+        //     }
+        // );
     }
 
 };
@@ -61,7 +63,15 @@ function authenticationFailed(req, res, next) {
         logger.debug("authenticationFailed : redirect request to home page ");
         res.redirect('/');
     }
-    res.status(401);
+    else if(path.slice(1,5) == 'cat/')
+    {
+        res.status(401);
+    }
+    else
+    {
+        next();
+        return;
+    }
     res.end();
 }
 
@@ -72,14 +82,99 @@ app.use(myAutheticator);
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
+// App settings
 app.set('views', './views');
-app.use(express.static('public'));
+app.use('/image', express.static('image'));
+app.use('/public', express.static('public'));
+app.use('/style', express.static('style'));
+app.set('view engine', 'jade');
 
 
 // Homepage
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/views/index.html'));
+
+    var http = require('http'); 
+
+    var options = {
+      host: 'localhost',
+      port: 1337,
+      path: '/cat/user/getRandomUsers',
+      method: 'GET',
+      headers: {'Cookie': 'userID='+req.cookies.userID}
+    };
+
+    callback = function(response) {
+        var people = '';
+        response.on('data', function(d) {
+            people= JSON.parse(d);
+        });
+        response.on('end', function() {
+            if(req.loginUserID != undefined && req.loginUserID != "undefined")
+        {
+            var p1 = dbConn.getUserName(req.loginUserID);
+            p1.then(
+                function(val)
+                {
+                  // console.log("currentUser: then: "+ val);
+                   var curUser=(JSON.parse(val));
+
+                    res.render('index', {
+                        people: people,
+                        curUser:curUser,
+                        person: {
+                            "name": "Lisa Eng",
+                            "image": "https://media.licdn.com/media/AAEAAQAAAAAAAALfAAAAJDU2YWFiZGM0LTgxZmEtNDcyZC05ODI4LTViZGM1YTg5MDkyOQ.jpg",
+                            "work": ["Product Manager, Business Intelligence, Aereo", "Special Operations, Warby Parker Marketing, Quirky", "Special Customer Operations, Simon Schuster", "Associate, Triage Consulting Group"],
+                            "education": ["MBA from NYU Stern Business School, University of California San Diego"],
+                            "tags": ["strategy", "marketing", "tech", "SF", "49ers", "dogs", "consulting", "productmanager"],
+                            "job": "Product Manager at Oracle Data Cloud",
+                            "quote": "I am a dog-lover, 49ers fan, and tech enthusiast. Previously in New York, I live in San Francisco now with my husband and malti-poo dog, Izzo. Yes named after Coach Izzo!"
+                        }
+                    });
+                    res.end();
+                    return;
+
+                }
+            ).catch(
+                function(reason) {
+                    var obj=JSON.parse(reason)
+                    res.status(obj.error);
+                    return;
+          
+                }
+            );
+        }
+        else
+        {
+            res.render('index', {
+                people: people,
+                person: {
+                    "name": "Lisa Eng",
+                    "image": "https://media.licdn.com/media/AAEAAQAAAAAAAALfAAAAJDU2YWFiZGM0LTgxZmEtNDcyZC05ODI4LTViZGM1YTg5MDkyOQ.jpg",
+                    "work": ["Product Manager, Business Intelligence, Aereo", "Special Operations, Warby Parker Marketing, Quirky", "Special Customer Operations, Simon Schuster", "Associate, Triage Consulting Group"],
+                    "education": ["MBA from NYU Stern Business School, University of California San Diego"],
+                    "tags": ["strategy", "marketing", "tech", "SF", "49ers", "dogs", "consulting", "productmanager"],
+                    "job": "Product Manager at Oracle Data Cloud",
+                    "quote": "I am a dog-lover, 49ers fan, and tech enthusiast. Previously in New York, I live in San Francisco now with my husband and malti-poo dog, Izzo. Yes named after Coach Izzo!"
+                }
+            });
+            res.end();
+        }
+        return;
+            
+        });
+
+        req.on('error', function(e) {
+            throw err;
+        });
+    }
+
+    var request = http.request(options, callback);
+   // request.write(bodyString);
+    request.end();
+
 });
+
 
 
 // var fs = require('fs');
@@ -109,7 +204,7 @@ app.get('/', function(req, res) {
 // });
 
 var resource = null;
-var array = ['./Resources/cat/oauth/getUserID.js','./Resources/cat/user/getUserName.js','./Resources/cat/user/currentUser.js','./Resources/wild/oauth/auth.js','./Resources/wild/oauth/callBack.js'];
+var array = ['./Resources/cat/oauth/getUserID.js','./Resources/cat/user/getUserName.js','./Resources/cat/user/currentUser.js','./Resources/wild/oauth/auth.js','./Resources/wild/oauth/callBack.js','./resources/cat/user/getRandomUsers.js'];
 for (i in array) {
     logger.debug(array[i]);
     resource = require(array[i]);

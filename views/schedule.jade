@@ -1,0 +1,21 @@
+html
+	head
+		link(href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
+		link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css")
+		link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css')
+		link(rel="stylesheet" href="/style/index.css")
+	body
+		include ./includes/header.jade
+		div(class="section coffee-chat-grey-background")
+			div(class="row container")
+				h3(class="center header") Schedule a Coffee Chat
+			each person, index in people
+				include ./includes/times.jade
+			div(class="row container")
+				p
+				button(class="btn btn-flat waves-effect white-text coffee-chat-orange fill submit") Submit
+		include ./includes/footer.jade
+
+	script(src="https://code.jquery.com/jquery-2.2.0.min.js")
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js")
+	script(src="/public/js/schedule.js")

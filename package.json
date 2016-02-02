@@ -1,0 +1,26 @@
+{
+  "name": "coffee-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "coffee-chat",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.3",
+    "jade": "^1.11.0",
+    "log4js": "^0.6.30",
+    "mysql": "^2.10.2",
+    "nib": "^1.1.0",
+    "node-mysql": "^0.4.2",
+    "promise": "^7.1.1",
+    "request": "^2.67.0",
+    "simple-oauth2": "^0.3.0",
+    "stylus": "^0.53.0"
+  }
+}

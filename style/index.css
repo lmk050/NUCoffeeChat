@@ -1,0 +1,96 @@
+.linked-in-btn {
+  display: inline-block;
+  margin-top: 20px;
+  width: 215px;
+  height: 40px;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-image: url('../image/LinkedIn-Default.png');
+  background-size: contain;
+}
+
+.linked-in-btn:active {
+  background-image: url('../image/LinkedIn-Active.png');
+}
+
+.linked-in-btn:hover {
+  background-image: url('../image/LinkedIn-Hover.png');
+}
+
+.coffe-chat-logo {
+  height: 100%;
+}
+
+.parallax-container {
+  height: 400px;
+}
+
+.text-orange {
+  color: #EC6445;
+}
+
+.text-grey {
+  color: #635A5D;
+}
+
+.chip {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+textarea {
+  resize: none;
+  height: 100px;
+}
+
+.fill {
+  width: 100%;
+}
+
+.tiny-text {
+  font-size: 10px;
+}
+
+.coffee-chat-orange {
+  background: #ff7050 !important;
+}
+
+.coffee-chat-grey {
+  color: #565a56;
+}
+
+.coffee-chat-grey-background {
+  background: #FAFAFA;
+}
+
+.coffee-chat-divider:before, .coffee-chat-divider:after {
+  content: "";
+  display: inline-block;
+  width: 30%;
+  margin: 0 .5em 0 -55%;
+  vertical-align: middle;
+  border-bottom: 1px solid;
+}
+
+.coffee-chat-divider:after {
+  margin: 0 -55% 0 .5em;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+ color: #ff7050;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+ border-bottom: 1px solid #ff7050;
+ box-shadow: 0 1px 0 0 #ff7050;
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+ color: #000;
+}

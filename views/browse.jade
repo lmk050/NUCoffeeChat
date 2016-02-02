@@ -1,0 +1,27 @@
+html
+	head
+		link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css")
+	body
+		include ./includes/header.jade
+		div(class="container")
+			h2(class="center") 
+			h5(class="center") 
+			div(class="row")
+				each person, index in people
+					div(class="col s12 m4 l3")
+						div(class="card")
+							div(class="card-image waves-effect waves-block waves-light")
+								img(class="activator" src=person.image)
+							div(class="card-content")
+								span(class="card-title")=person.name
+								p=person.job
+							div(class="card-reveal")
+								span(class="card-title")=person.name
+									i(class="material-icons right") close
+								p=person.job
+								p=person.bio
+		include ./includes/footer.jade
+
+	script(src="https://code.jquery.com/jquery-2.2.0.min.js")
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js")
+	script(src="/public/js/browse.js")

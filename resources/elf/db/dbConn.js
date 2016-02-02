@@ -21,6 +21,74 @@ exports.clearup = function(){
 }
 
 
+exports.getRandomUserInfos = function(noOfUsers){
+
+    return new Promise(function(resolve, reject) {
+           pool.getConnection(function(err, connection) {
+            if (err) {
+                connection.release();
+                logger.debug('Error in connection database');
+
+                reject('Error in connection database');
+            }
+            logger.debug('connected as id ' + connection.threadId);
+
+            var sql = "SELECT u.id, u.firstName, u.lastName, u.email, u.headline, u.profilePicO, u.linkedInProfile, i.`name` as industry From user_basic as u LEFT JOIN industry_desc as i on u.industry = i.id  ORDER BY RAND() LIMIT ?";
+            var inserts = [noOfUsers];
+            sql = mysql.format(sql, inserts);
+
+            logger.debug("getUserInfo: going to query random user infos: "+ sql);
+            connection.query(sql,function(err, rows) {
+                if(!err)
+                {
+
+                    if(rows.length > 0 ) {
+                         var result='{"total":"'+noOfUsers+'","values":[';
+                         var first=true;
+                         for(i=0; i<rows.length;i++)
+                         {
+                            if(!first)
+                            {
+                                result+=",";
+                            }
+                            first=false;
+                            result +='{"userId":"'+rows[i].id+'","firstName":"'+rows[i].firstName+'","lastName":"'+rows[i].lastName+'","headLine":"'+rows[i].headline+'","industry":"'+rows[i].industry+'","profilePic":"'+rows[i].profilePicO+'","linkedInProfile":"'+rows[i].linkedInProfile+'"}';        
+                         }
+                         result+="]}"
+                    connection.release();
+                    //logger.debug("getUserInfo: random user infos: "+ result);
+                    resolve(result);
+                
+                    }
+                    else
+                    {
+                        logger.debug("dbConn: didnt find user: "+ userId);
+                        connection.release();
+                        reject('{"error":"400", "errorMsg":"Invalid UserID"}');
+                                    
+                    }
+                }
+                else
+                {
+                     logger.debug('Error in connection database');
+                     connection.release();
+                     reject('{"error":"500","errorMsg": '+err+'}');
+                }
+               
+            });
+                    
+
+            connection.on('error',function(err) {
+                logger.debug('Error in connection database');
+                connection.release();
+                reject('{"error":"500","errorMsg": "Error in connection database"}');
+
+            });
+        });
+       });
+
+}
+
 exports.getUserInfo = function(userId){
 
     return new Promise(function(resolve, reject) {

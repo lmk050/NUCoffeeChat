@@ -1,0 +1,124 @@
+[2016-01-31 17:57:55.179] [DEBUG] coffeeChat - ./Resources/cat/oauth/getUserID.js
+[2016-01-31 17:57:55.189] [DEBUG] coffeeChat - cat/oauth/getUserID POST
+[2016-01-31 17:57:55.190] [DEBUG] coffeeChat - ./Resources/cat/user/getUserName.js
+[2016-01-31 17:57:55.191] [DEBUG] coffeeChat - cat/user/:userId/getUserName GET
+[2016-01-31 17:57:55.192] [DEBUG] coffeeChat - ./Resources/cat/user/currentUser.js
+[2016-01-31 17:57:55.193] [DEBUG] coffeeChat - cat/user/currentUser GET
+[2016-01-31 17:57:55.193] [DEBUG] coffeeChat - ./Resources/wild/oauth/auth.js
+[2016-01-31 17:57:55.329] [DEBUG] coffeeChat - wild/oauth/auth GET
+[2016-01-31 17:57:55.336] [DEBUG] coffeeChat - ./Resources/wild/oauth/callBack.js
+[2016-01-31 17:57:55.337] [DEBUG] coffeeChat - callback GET
+[2016-01-31 17:57:55.347] [DEBUG] coffeeChat - Example app listening on port 1337!
+[2016-01-31 18:06:41.213] [DEBUG] coffeeChat - ./Resources/cat/oauth/getUserID.js
+[2016-01-31 18:06:41.223] [DEBUG] coffeeChat - cat/oauth/getUserID POST
+[2016-01-31 18:06:41.224] [DEBUG] coffeeChat - ./Resources/cat/user/getUserName.js
+[2016-01-31 18:06:41.225] [DEBUG] coffeeChat - cat/user/:userId/getUserName GET
+[2016-01-31 18:06:41.226] [DEBUG] coffeeChat - ./Resources/cat/user/currentUser.js
+[2016-01-31 18:06:41.227] [DEBUG] coffeeChat - cat/user/currentUser GET
+[2016-01-31 18:06:41.227] [DEBUG] coffeeChat - ./Resources/wild/oauth/auth.js
+[2016-01-31 18:06:41.360] [DEBUG] coffeeChat - wild/oauth/auth GET
+[2016-01-31 18:06:41.361] [DEBUG] coffeeChat - ./Resources/wild/oauth/callBack.js
+[2016-01-31 18:06:41.362] [DEBUG] coffeeChat - callback GET
+[2016-01-31 18:06:41.367] [DEBUG] coffeeChat - Example app listening on port 1337!
+[2016-01-31 18:22:38.135] [DEBUG] coffeeChat - ./Resources/cat/oauth/getUserID.js
+[2016-01-31 18:22:38.146] [DEBUG] coffeeChat - cat/oauth/getUserID POST
+[2016-01-31 18:22:38.147] [DEBUG] coffeeChat - ./Resources/cat/user/getUserName.js
+[2016-01-31 18:22:38.148] [DEBUG] coffeeChat - cat/user/:userId/getUserName GET
+[2016-01-31 18:22:38.149] [DEBUG] coffeeChat - ./Resources/cat/user/currentUser.js
+[2016-01-31 18:22:38.149] [DEBUG] coffeeChat - cat/user/currentUser GET
+[2016-01-31 18:22:38.150] [DEBUG] coffeeChat - ./Resources/wild/oauth/auth.js
+[2016-01-31 18:22:38.279] [DEBUG] coffeeChat - wild/oauth/auth GET
+[2016-01-31 18:22:38.279] [DEBUG] coffeeChat - ./Resources/wild/oauth/callBack.js
+[2016-01-31 18:22:38.281] [DEBUG] coffeeChat - callback GET
+[2016-01-31 18:22:38.287] [DEBUG] coffeeChat - Example app listening on port 1337!
+[2016-02-02 15:47:47.083] [DEBUG] coffeeChat - ./Resources/cat/oauth/getUserID.js
+[2016-02-02 15:47:47.092] [DEBUG] coffeeChat - cat/oauth/getUserID POST
+[2016-02-02 15:47:47.093] [DEBUG] coffeeChat - ./Resources/cat/user/getUserName.js
+[2016-02-02 15:47:47.094] [DEBUG] coffeeChat - cat/user/:userId/getUserName GET
+[2016-02-02 15:47:47.095] [DEBUG] coffeeChat - ./Resources/cat/user/currentUser.js
+[2016-02-02 15:47:47.096] [DEBUG] coffeeChat - cat/user/currentUser GET
+[2016-02-02 15:47:47.096] [DEBUG] coffeeChat - ./Resources/wild/oauth/auth.js
+[2016-02-02 15:47:47.229] [DEBUG] coffeeChat - wild/oauth/auth GET
+[2016-02-02 15:47:47.234] [DEBUG] coffeeChat - ./Resources/wild/oauth/callBack.js
+[2016-02-02 15:47:47.235] [DEBUG] coffeeChat - callback GET
+[2016-02-02 15:47:47.236] [DEBUG] coffeeChat - ./resources/cat/user/getRandomUsers.js
+[2016-02-02 15:47:47.240] [DEBUG] coffeeChat - cat/user/getRandomUsers GET
+[2016-02-02 15:47:47.246] [DEBUG] coffeeChat - Example app listening on port 1337!
+[2016-02-02 15:47:51.908] [DEBUG] coffeeChat - myLogger - new request: /
+[2016-02-02 15:47:51.910] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:47:51.911] [DEBUG] coffeeChat - authenticationFailed : path matched 
+[2016-02-02 15:47:51.931] [DEBUG] coffeeChat - myLogger - new request: /cat/user/getRandomUsers
+[2016-02-02 15:47:51.932] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:47:52.902] [DEBUG] coffeeChat - myLogger - new request: /style/index.css
+[2016-02-02 15:47:52.903] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:47:52.911] [DEBUG] coffeeChat - myLogger - new request: /public/js/index.js
+[2016-02-02 15:47:52.911] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:10.802] [DEBUG] coffeeChat - myLogger - new request: /image/logo.png
+[2016-02-02 15:48:10.802] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:10.803] [DEBUG] coffeeChat - myLogger - new request: /image/coffee-chat-third.jpg
+[2016-02-02 15:48:10.804] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:10.807] [DEBUG] coffeeChat - myLogger - new request: /image/coffee-chat-second-text.jpg
+[2016-02-02 15:48:10.807] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:10.810] [DEBUG] coffeeChat - myLogger - new request: /image/LinkedIn-Default.png
+[2016-02-02 15:48:10.811] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:11.253] [DEBUG] coffeeChat - myLogger - new request: /
+[2016-02-02 15:48:11.254] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:11.254] [DEBUG] coffeeChat - authenticationFailed : path matched 
+[2016-02-02 15:48:11.260] [DEBUG] coffeeChat - myLogger - new request: /cat/user/getRandomUsers
+[2016-02-02 15:48:11.260] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:11.488] [DEBUG] coffeeChat - myLogger - new request: /style/index.css
+[2016-02-02 15:48:11.489] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:11.494] [DEBUG] coffeeChat - myLogger - new request: /public/js/index.js
+[2016-02-02 15:48:11.495] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:11.534] [DEBUG] coffeeChat - myLogger - new request: /image/logo.png
+[2016-02-02 15:48:11.534] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:11.535] [DEBUG] coffeeChat - myLogger - new request: /image/coffee-chat-third.jpg
+[2016-02-02 15:48:11.536] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:11.537] [DEBUG] coffeeChat - myLogger - new request: /image/coffee-chat-second-text.jpg
+[2016-02-02 15:48:11.537] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:11.575] [DEBUG] coffeeChat - myLogger - new request: /image/LinkedIn-Default.png
+[2016-02-02 15:48:11.575] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:12.736] [DEBUG] coffeeChat - myLogger - new request: /
+[2016-02-02 15:48:12.737] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:12.740] [DEBUG] coffeeChat - authenticationFailed : path matched 
+[2016-02-02 15:48:12.743] [DEBUG] coffeeChat - myLogger - new request: /cat/user/getRandomUsers
+[2016-02-02 15:48:12.744] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:12.898] [DEBUG] coffeeChat - myLogger - new request: /style/index.css
+[2016-02-02 15:48:12.899] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:12.903] [DEBUG] coffeeChat - myLogger - new request: /public/js/index.js
+[2016-02-02 15:48:12.904] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:12.912] [DEBUG] coffeeChat - myLogger - new request: /image/logo.png
+[2016-02-02 15:48:12.913] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:12.915] [DEBUG] coffeeChat - myLogger - new request: /image/coffee-chat-third.jpg
+[2016-02-02 15:48:12.916] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:12.916] [DEBUG] coffeeChat - myLogger - new request: /image/coffee-chat-second-text.jpg
+[2016-02-02 15:48:12.917] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:12.952] [DEBUG] coffeeChat - myLogger - new request: /image/LinkedIn-Default.png
+[2016-02-02 15:48:12.953] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:16.557] [DEBUG] coffeeChat - myLogger - new request: /image/LinkedIn-Hover.png
+[2016-02-02 15:48:16.558] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:16.900] [DEBUG] coffeeChat - myLogger - new request: /wild/oauth/auth
+[2016-02-02 15:48:16.901] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:16.901] [DEBUG] coffeeChat - authenticationFailed : path matched 
+[2016-02-02 15:48:37.076] [DEBUG] coffeeChat - myLogger - new request: /
+[2016-02-02 15:48:37.076] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:37.076] [DEBUG] coffeeChat - authenticationFailed : path matched 
+[2016-02-02 15:48:37.084] [DEBUG] coffeeChat - myLogger - new request: /cat/user/getRandomUsers
+[2016-02-02 15:48:37.084] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:37.300] [DEBUG] coffeeChat - myLogger - new request: /style/index.css
+[2016-02-02 15:48:37.300] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:37.306] [DEBUG] coffeeChat - myLogger - new request: /public/js/index.js
+[2016-02-02 15:48:37.306] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:37.311] [DEBUG] coffeeChat - myLogger - new request: /image/logo.png
+[2016-02-02 15:48:37.312] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:37.316] [DEBUG] coffeeChat - myLogger - new request: /image/coffee-chat-third.jpg
+[2016-02-02 15:48:37.316] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:37.323] [DEBUG] coffeeChat - myLogger - new request: /image/coffee-chat-second-text.jpg
+[2016-02-02 15:48:37.324] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:37.356] [DEBUG] coffeeChat - myLogger - new request: /image/LinkedIn-Default.png
+[2016-02-02 15:48:37.357] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:39.172] [DEBUG] coffeeChat - myLogger - new request: /image/LinkedIn-Hover.png
+[2016-02-02 15:48:39.173] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:39.416] [DEBUG] coffeeChat - myLogger - new request: /wild/oauth/auth
+[2016-02-02 15:48:39.417] [DEBUG] coffeeChat - myLogger - new request: undefined
+[2016-02-02 15:48:39.417] [DEBUG] coffeeChat - authenticationFailed : path matched 
